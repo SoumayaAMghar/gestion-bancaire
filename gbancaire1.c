@@ -20,6 +20,9 @@ typedef struct comptebancaire
 //---------------------------------------------
 int main()
 {
+clients *comptebancaireptr, comptebancaire;
+comptebancaireptr = &comptebancaire;
+
 int opnum;
 
 menuprincipale:
@@ -80,40 +83,40 @@ switch (opnum){
 void premierchoix(){
 int i, n=1;	
 
-        clients comptebancaire[n];
+        clients *comptebancaireptr[n];
         
         for(i=0 ; i < n ; i++)
         {
         printf("entrer le cin :");
-        scanf("%s",&comptebancaire[i].cin);
+        scanf("%s",&(*comptebancaireptr[i]).cin);
         printf("entrer le nom :");
-        scanf("%s",&comptebancaire[i].nom);
+        scanf("%s",&(*comptebancaireptr[i]).nom);
         printf("entrer le prenom :");
-        scanf("%s",&comptebancaire[i].prenom);
+        scanf("%s",&(*comptebancaireptr[i]).prenom);
         printf("entrer le montant :");
-        scanf("%f",&comptebancaire[i].montant);
+        scanf("%f",&(*comptebancaireptr[i]).montant);
         
 		}
 }
 //
-void deuxiemechoix(){
+ deuxiemechoix(){
        
         int i;
         printf("choisissez le nombre des comptes ");
         scanf("%d",&n);
         
-        clients comptebancaire[n];
+        clients *comptebancaireptr[n];
         
         for(i=0 ; i < n ; i++)
         {
         printf("entrer le cin :");
-        scanf("%s",&comptebancaire[i].cin);
+        scanf("%s",&(*comptebancaireptr[i]).cin);
         printf("entrer le nom :");
-        scanf("%s",&comptebancaire[i].nom);
+        scanf("%s",&(*comptebancaireptr[i]).nom);
         printf("entrer le prenom :");
-        scanf("%s",&comptebancaire[i].prenom);
+        scanf("%s",&(*comptebancaireptr[i]).prenom);
         printf("entrer le montant :");
-        scanf("%f",&comptebancaire[i].montant);
+        scanf("%f",&(*comptebancaireptr[i]).montant);
         
 		}
         
