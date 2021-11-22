@@ -3,13 +3,11 @@
 #include<string.h>
 
 int n;
-//menu
-void menuprincipale()
-{
-printf("\n1-Introduire un compte bancaire (CIN, Nom et Prenom, Montant)\n");
-printf("2-Introduire plusieurs comptes bancaires (CIN, Nom et Prenom, Montant)\n");
-printf("3-Operations\n4-Affichage\n5-Fidelisation\n6-Quitter l'application\n");
-}
+void premierchoix();
+void deuxiemechoix();
+void troisiemechoix();
+void quatriemechoix();
+
 //structure
 typedef struct comptebancaire
 {
@@ -18,19 +16,84 @@ typedef struct comptebancaire
     char prenom[100];
     float montant;
 }clients;
+
+//---------------------------------------------
+int main()
+{
+int opnum;
+
+menuprincipale:
+printf("\n1-Introduire un compte bancaire (CIN, Nom et Prenom, Montant)\n");
+printf("2-Introduire plusieurs comptes bancaires (CIN, Nom et Prenom, Montant)\n");
+printf("3-Operations\n\t-retrait\n\t-depot\n");
+printf("4-Affichage\n\t-Par ordre ascendant\n\t-Par Ordre Descendant\n\t");
+printf("-Par ordre ascendant (les comptes bancaires ayant un montant superieur a un chiffre introduit)\n\t");
+printf("-Par ordre descendant (les comptes bancaires ayant un montant superieur a un chiffre introduit)\n\t-Recherche par CIN");
+printf("5-Fidelisation\n\t-Ajouter 1.3 pourcent aux comptes ayant les 3 premiers montants superieurs\n6-Quitter l'application\n\n");
+printf("choisissez le numero d'operation :");
+scanf("%d",&opnum);
+
+
+
+
+
+switch (opnum){
+    case 1:
+    {
+        premierchoix();
+        system("cls");
+        goto menuprincipale;;
+        break;
+    }
+    
+    case 2:
+    {
+        deuxiemechoix();
+        goto menuprincipale;
+        break;
+    }
+    
+    case 3:
+    {    troisiemechoix();
+        goto menuprincipale;;
+        break;
+    }
+    case 4:
+    {    quatriemechoix();
+   		 goto menuprincipale;
+        break;
+    }
+//    case 5:
+//    {
+//        cinquiemechoix();
+//        break;
+//    }
+//    case 6:
+//    {
+//        sixiemechoix();
+//        break;
+//    }
+}
+
+}
 //
 void premierchoix(){
-        clients comptebancaire;
+int i, n=1;	
+
+        clients comptebancaire[n];
+        
+        for(i=0 ; i < n ; i++)
+        {
         printf("entrer le cin :");
-        scanf("%s",&comptebancaire.cin);
-        printf("\n entrer le nom :");
-        scanf("%s",&comptebancaire.nom);
-        printf("\n entrer le prenom :");
-        scanf("%s",&comptebancaire.prenom);
-        printf("\n entrer le montant :");
-        scanf("%f",&comptebancaire.montant);
-        printf("cin: %s\t |Nom et prenom: %s %s\t | montant: %.2f\n",comptebancaire.cin, comptebancaire.nom, comptebancaire.prenom,comptebancaire.montant);
-            
+        scanf("%s",&comptebancaire[i].cin);
+        printf("entrer le nom :");
+        scanf("%s",&comptebancaire[i].nom);
+        printf("entrer le prenom :");
+        scanf("%s",&comptebancaire[i].prenom);
+        printf("entrer le montant :");
+        scanf("%f",&comptebancaire[i].montant);
+        
+		}
 }
 //
 void deuxiemechoix(){
@@ -51,7 +114,8 @@ void deuxiemechoix(){
         scanf("%s",&comptebancaire[i].prenom);
         printf("entrer le montant :");
         scanf("%f",&comptebancaire[i].montant);
-        }
+        
+		}
         
         printf("\nLa liste de vos comptes\n");
         printf("\n----------------------------------------------------------------------\n");
@@ -64,7 +128,7 @@ void deuxiemechoix(){
 //
 void troisiemechoix()
 {
-clients comptebancaire;
+clients comptebancaire[n];
 float retrait, depot;
 int num;
 char cin[12];
@@ -78,38 +142,12 @@ int i;
     
     if(num==1)
     {
-        printf("veuillez introduire un ou plusieurs comptes bancaires\n");
-        printf("choisissez le nombre des comptes ");
-        scanf("%d",&n);
-        
-        clients comptebancaire[n];
-        
-        for(i=0 ; i <n ; i++)
-        {
-        printf("entrer le cin :");
-        scanf("%s",&comptebancaire[i].cin);
-        printf("entrer le nom :");
-        scanf("%s",&comptebancaire[i].nom);
-        printf("entrer le prenom :");
-        scanf("%s",&comptebancaire[i].prenom);
-        printf("entrer le montant :");
-        scanf("%f",&comptebancaire[i].montant);
-        }
-        
-        printf("\nLa liste de vos comptes\n");
-        printf("\n----------------------------------------------------------------------\n");
-        for(i=0 ; i<n ; i++)
-        {
-            printf("cin: %s\t |Nom et prenom: %s %s\t | montant: %.2f\n",comptebancaire[i].cin, comptebancaire[i].nom, comptebancaire[i].prenom,comptebancaire[i].montant);
-        }
-        printf("------------------------------------------------------------------------\n");
-               
+                      
         printf("Taper le CIN du compte de retrait ");
         scanf("%s",&cin);
          
         for(i=0 ; i<n ; i++){
-        	
-        	if(strcmp(comptebancaire[i].cin,cin)== 0 ){
+        	if((strcmp(comptebancaire[i].cin,cin))== 0 ){
         	printf("taper le montant a retirer\n");
         	scanf("%f",&retrait);	
         	if(retrait < comptebancaire[i].montant)
@@ -400,51 +438,3 @@ if(num == 5)
 
 }
 
-
-int main()
-{
-
-int opnum;
-
-menuprincipale();
-printf("choisissez le numero d'operation :");
-scanf("%d",&opnum);
-
-switch (opnum){
-    case 1:
-    {
-        premierchoix();
-        menuprincipale();
-        break;
-    }
-    
-    case 2:
-    {
-        deuxiemechoix();
-        menuprincipale();
-        break;
-    }
-    
-    case 3:
-    {    troisiemechoix();
-        menuprincipale();
-        break;
-    }
-    case 4:
-    {    quatriemechoix();
-   		 menuprincipale();
-        break;
-    }
-//    case 5:
-//    {
-//        cinquiemechoix();
-//        break;
-//    }
-//    case 6:
-//    {
-//        sixiemechoix();
-//        break;
-//    }
-}
-
-}
